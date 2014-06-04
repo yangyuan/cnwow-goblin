@@ -1,0 +1,43 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Goblin" x:Class="Goblin.MainWindow"
+        Title="MainWindow" Height="640" Width="640" Closed="Window_Closed">
+    <Grid>
+        <ComboBox x:Name="ComboBoxAuctionItem" HorizontalAlignment="Left" Margin="116,10,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Items, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" DisplayMemberPath="name" SelectedValuePath="id" SelectionChanged="ComboBoxAuctionItem_SelectionChanged"/>
+        <Button x:Name="ButtonDebug" Content="测试" Margin="537,6,10,0" VerticalAlignment="Top" Click="ButtonDebug_Click" Height="32"/>
+        <ListView x:Name="ListViewAuctions" Margin="10,113,10,10" ItemsSource="{Binding Auctions, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+            <ListView.Resources>
+                <ContextMenu x:Key="ContextMenuAuction" >
+                    <MenuItem x:Name="MenuItemBuyout" Header="购买" Click="MenuItemBuyout_Click" />
+                    <Separator />
+                    <MenuItem x:Name="MenuItemIngore" Header="忽略" Click="MenuItemIngore_Click" />
+                </ContextMenu>
+            </ListView.Resources>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="ContextMenu" Value="{StaticResource ContextMenuAuction}" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Border x:Name="BorderAvatar" BorderBrush="#FFCCCCCC" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="11,6,0,0" VerticalAlignment="Top" Width="100" Background="#FFE7E7E7">
+            <Image x:Name="ImageAvatar" Margin="7" OpacityMask="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}" RenderTransformOrigin="0.619,-0.048"/>
+        </Border>
+        <Button x:Name="ButtonSearch" Content="查询" HorizontalAlignment="Left" Margin="241,10,0,0" VerticalAlignment="Top" Width="71" Click="ButtonSearch_Click" Height="22"/>
+        <Label x:Name="LabelCharacterName" Content="N/A" HorizontalAlignment="Left" Margin="11,66,0,0" VerticalAlignment="Top" Height="32" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Foreground="White">
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="9"/>
+            </Label.Effect>
+        </Label>
+        <Button x:Name="ButtonLogin" Content="登录" HorizontalAlignment="Left" Margin="11,6,0,0" VerticalAlignment="Top" Width="100" Click="ButtonLogin_Click" Height="100"/>
+        <Label x:Name="LabelItem" Content="" HorizontalAlignment="Left" Margin="116,68,0,0" VerticalAlignment="Top" Width="120" Height="38" FontSize="18" VerticalContentAlignment="Center"/>
+        <Label x:Name="LabelCount" Content="" HorizontalAlignment="Left" Margin="116,37,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="ButtonReload" Content="重载配置" Margin="324,6,223,0" VerticalAlignment="Top" Height="32" Click="ButtonReload_Click"/>
+        <Button x:Name="ButtonLoop" Content="监控市场" Margin="324,74,223,0" VerticalAlignment="Top" Height="32" Click="ButtonLoop_Click"/>
+    </Grid>
+</Window>
